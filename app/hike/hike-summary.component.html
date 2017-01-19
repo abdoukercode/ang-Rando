@@ -1,0 +1,10 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><a [routerLink]="['/hikes', hike.id]">{{hike.name | uppercase }}</a></h3>
+  </div>
+  <div class="panel-body">
+    {{hike.description}}
+    <br>
+    <input type="checkbox" name="" (change)="toggleAsTodoHike($event.target.checked)"> A Faire
+  </div>
+</div>

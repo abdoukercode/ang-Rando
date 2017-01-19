@@ -1,0 +1,39 @@
+<div class="container">
+<!--<div id="home-image"></div>-->
+
+<div>
+    <h3 style="text-align:center;">Bienvenue sur le site Angular-Rando</h3>
+    Ullamco consectetur amet excepteur excepteur. Officia proident est officia pariatur tempor culpa id esse occaecat. Laborum mollit aliquip nulla proident cupidatat ullamco velit nulla voluptate exercitation in ex eu. Aliqua consectetur eu cupidatat quis eu ad sit do irure.
+</div>
+<br>
+
+<button (click)="toggle()" *ngIf= "!open" class="btn btn-success">ouvrir</button>
+<button (click)="toggle()" *ngIf="open" class="btn btn-danger">fermer</button>
+
+
+<div [@toggleElement]="toggleElement">  
+    Id amet ea velit culpa do proident et do elit sunt mollit commodo ipsum magna. Ad qui eiusmod aliquip irure. Ipsum adipisicing nisi eiusmod ullamco enim amet do sint magna nulla amet ea reprehenderit do. Sint aliquip amet amet est aute.   
+    
+ </div>
+<div>
+    <h3>Citations</h3>
+    <div class="frame col-md-6">
+              <div class="citation" [@animateCitation]="animateCitation" (@animateCitation.start)="log($event)" (@animateCitation.done)="log($event)">
+            {{quote.text}}
+             
+        <br>
+       <em>{{quote.author}}</em>
+            
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="row">
+    <div class="col-md-6">
+        <a  class="btn btn-primary" (click)="getPreviousQuote()">précédente</a>
+        <a class="btn btn-primary" (click)="getNextQuote()">suivante</a>
+        
+    </div>
+</div>
+</div>

@@ -1,0 +1,73 @@
+<div class="row">
+    <h3>Carte de notre prochaine Randonnée</h3>
+        <div>       
+            <input class="start" 
+                type="text" 
+                placeholder= "votre point de départ" 
+                [(ngModel)]="startingPoint" >
+            <button class="btn btn-primary" (click)="geocode()">Localiser</button>
+            <button class="btn btn-danger" (click)="resetStartingPoint()">Reset</button>
+            
+        </div>  
+
+        <br>
+        <form (submit)="addMarkerByCoords(form.value)" #form="ngForm">
+            <label for="markerByCoordsLat">Latitude</label>
+            <input type="text" name="markerByCoordsLat" ngModel id="markerByCoordsLat">
+
+            <label for="markerByCoordsLng">Longitude</label>
+            <input type="text" name="markerByCoordsLng" ngModel id="markerByCoordsLng">
+
+            <button type="submit">ajouter</button> 
+
+        </form> 
+
+    <sebm-google-map [latitude]="lat" [longitude]="lng">
+  <sebm-google-map-marker
+                     [latitude]="lat"
+                      [longitude]="lng"
+                      [markerDraggable]= "true"
+                      (dragEnd)= "onCoordMarkerDropped($event)">
+                      </sebm-google-map-marker>
+                       <sebm-google-map-marker *ngFor= "let m of markers"
+                      [latitude]="m.lat"
+                      [longitude]="m.lng"
+                      [markerDraggable]= "m.draggable">
+                      </sebm-google-map-marker>
+                    <sebm-google-map-marker *ngFor= "let m of markersFromCoords"
+                     [latitude]="m.lat"
+                      [longitude]="m.lng"
+                      [markerDraggable]= "m.draggable"
+                      [iconUrl]="m.icon"
+                      >
+                      </sebm-google-map-marker>
+                                  <sebm-google-map-marker  
+                *ngFor="let m of markers; let i = index"
+                [latitude]="m.lat" 
+                [longitude]="m.lng" 
+                [markerDraggable]="m.draggable"
+                [title]="m.title"
+                (dragEnd)="updatePolyline($event)"
+                [iconUrl]="m.icon"
+                >
+            </sebm-google-map-marker>
+                 <sebm-google-map-polyline [strokeColor]="red">
+                <sebm-google-map-polyline-point 
+                    *ngFor="let point of pointsForPolyline"
+                    [latitude]="point.lat" 
+                    [longitude]="point.lng"      
+                    >
+                </sebm-google-map-polyline-point>
+            </sebm-google-map-polyline>
+                     
+</sebm-google-map>
+<div *ngIf= "markerWasDropped">
+    latitude: {{droppedLat}}
+    longitude: {{droppedLng}}
+</div>
+
+<div *ngIf="!markerWasDropped">
+    Veuillez déplacer le marquer pour obtenir des coordonnées GPS
+</div>
+</div>
+
